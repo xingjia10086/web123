@@ -1,0 +1,709 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Web3导航 - 区块链行业最全导航网站</title>
+    <meta name="description" content="Web3导航 - 专业的区块链行业导航网站，为区块链爱好者提供最全面的资源导航">
+    <meta name="keywords" content="Web3,区块链,比特币,以太坊,DeFi,NFT,导航,区块链导航">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌐</text></svg>">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans SC", sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            color: #333;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* 头部样式 */
+        .header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 20px 0;
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 3px solid #667eea;
+        }
+
+        .header-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .logo {
+            font-size: 2.5rem;
+            font-weight: bold;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .search-box {
+            flex: 1;
+            max-width: 500px;
+            position: relative;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 15px 50px 15px 20px;
+            border: 2px solid #e1e5e9;
+            border-radius: 50px;
+            font-size: 16px;
+            outline: none;
+            transition: all 0.3s ease;
+        }
+
+        .search-input:focus {
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        .search-btn {
+            position: absolute;
+            right: 5px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+        }
+
+        /* 主要内容区域 */
+        .main {
+            padding: 40px 0;
+        }
+
+        .welcome {
+            text-align: center;
+            margin-bottom: 50px;
+            color: white;
+        }
+
+        .welcome h1 {
+            font-size: 3rem;
+            margin-bottom: 15px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .welcome p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        /* 分类网格 */
+        .categories {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin-bottom: 50px;
+        }
+
+        .category {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .category:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        .category-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #f0f2f5;
+        }
+
+        .category-icon {
+            font-size: 2.5rem;
+            margin-right: 15px;
+        }
+
+        .category-title {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .category-subtitle {
+            color: #666;
+            font-size: 0.9rem;
+            margin-top: 5px;
+        }
+
+        .links {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+            gap: 10px;
+        }
+
+        .link {
+            display: flex;
+            align-items: center;
+            padding: 10px;
+            text-decoration: none;
+            color: #333;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+            background: #f8f9fa;
+            font-size: 14px;
+        }
+
+        .link:hover {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            transform: scale(1.05);
+        }
+
+        .link-icon {
+            margin-right: 8px;
+            font-size: 16px;
+        }
+
+        /* 热门推荐 */
+        .hot-section {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 30px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        .hot-title {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .hot-links {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+        }
+
+        .hot-link {
+            display: flex;
+            align-items: center;
+            padding: 15px;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            text-decoration: none;
+            border-radius: 15px;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        .hot-link:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.3);
+        }
+
+        .hot-link-icon {
+            margin-right: 10px;
+            font-size: 18px;
+        }
+
+        /* 页脚 */
+        .footer {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 30px 0;
+            text-align: center;
+            color: #666;
+            border-top: 3px solid #667eea;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .footer-links a {
+            color: #666;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: #667eea;
+        }
+
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            .categories {
+                grid-template-columns: 1fr;
+            }
+            
+            .welcome h1 {
+                font-size: 2rem;
+            }
+            
+            .logo {
+                font-size: 2rem;
+            }
+            
+            .header-content {
+                text-align: center;
+            }
+            
+            .search-box {
+                order: 3;
+                width: 100%;
+                max-width: none;
+            }
+        }
+
+        /* 动画效果 */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .category {
+            animation: fadeInUp 0.6s ease-out;
+        }
+
+        .category:nth-child(even) {
+            animation-delay: 0.2s;
+        }
+
+        .category:nth-child(3n) {
+            animation-delay: 0.4s;
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">🌐 Web3导航</div>
+                <div class="search-box">
+                    <input type="text" class="search-input" placeholder="搜索区块链资源..." id="searchInput">
+                    <button class="search-btn" onclick="performSearch()">🔍</button>
+                </div>
+                <div style="color: #667eea; font-weight: bold;">区块链行业最全导航</div>
+            </div>
+        </div>
+    </header>
+
+    <main class="main">
+        <div class="container">
+            <div class="welcome">
+                <h1>欢迎来到Web3世界</h1>
+                <p>为区块链小白提供最全面、最专业的资源导航</p>
+            </div>
+
+            <div class="hot-section">
+                <div class="hot-title">🔥 今日热门</div>
+                <div class="hot-links">
+                    <a href="https://coinmarketcap.com" class="hot-link" target="_blank">
+                        <span class="hot-link-icon">📈</span>CoinMarketCap - 加密货币行情
+                    </a>
+                    <a href="https://etherscan.io" class="hot-link" target="_blank">
+                        <span class="hot-link-icon">🔍</span>Etherscan - 以太坊浏览器
+                    </a>
+                    <a href="https://opensea.io" class="hot-link" target="_blank">
+                        <span class="hot-link-icon">🖼️</span>OpenSea - NFT交易平台
+                    </a>
+                    <a href="https://uniswap.org" class="hot-link" target="_blank">
+                        <span class="hot-link-icon">🔄</span>Uniswap - 去中心化交易
+                    </a>
+                </div>
+            </div>
+
+            <div class="categories">
+                <!-- 交易所 -->
+                <div class="category">
+                    <div class="category-header">
+                        <div class="category-icon">🏦</div>
+                        <div>
+                            <div class="category-title">加密货币交易所</div>
+                            <div class="category-subtitle">买卖数字货币的平台</div>
+                        </div>
+                    </div>
+                    <div class="links">
+                        <a href="https://www.binance.com" class="link" target="_blank">
+                            <span class="link-icon">🥇</span>币安
+                        </a>
+                        <a href="https://www.coinbase.com" class="link" target="_blank">
+                            <span class="link-icon">🇺🇸</span>Coinbase
+                        </a>
+                        <a href="https://www.okx.com" class="link" target="_blank">
+                            <span class="link-icon">⭕</span>OKX
+                        </a>
+                        <a href="https://www.huobi.com" class="link" target="_blank">
+                            <span class="link-icon">🔥</span>火币
+                        </a>
+                        <a href="https://www.gate.io" class="link" target="_blank">
+                            <span class="link-icon">🚪</span>Gate.io
+                        </a>
+                        <a href="https://www.bybit.com" class="link" target="_blank">
+                            <span class="link-icon">📊</span>Bybit
+                        </a>
+                    </div>
+                </div>
+
+                <!-- 区块链浏览器 -->
+                <div class="category">
+                    <div class="category-header">
+                        <div class="category-icon">🔍</div>
+                        <div>
+                            <div class="category-title">区块链浏览器</div>
+                            <div class="category-subtitle">查询交易和地址信息</div>
+                        </div>
+                    </div>
+                    <div class="links">
+                        <a href="https://etherscan.io" class="link" target="_blank">
+                            <span class="link-icon">⚡</span>Etherscan
+                        </a>
+                        <a href="https://btc.com" class="link" target="_blank">
+                            <span class="link-icon">₿</span>BTC.com
+                        </a>
+                        <a href="https://bscscan.com" class="link" target="_blank">
+                            <span class="link-icon">🟡</span>BscScan
+                        </a>
+                        <a href="https://polygonscan.com" class="link" target="_blank">
+                            <span class="link-icon">🟣</span>PolygonScan
+                        </a>
+                        <a href="https://arbiscan.io" class="link" target="_blank">
+                            <span class="link-icon">🔵</span>Arbiscan
+                        </a>
+                        <a href="https://optimistic.etherscan.io" class="link" target="_blank">
+                            <span class="link-icon">🔴</span>Optimism
+                        </a>
+                    </div>
+                </div>
+
+                <!-- DeFi协议 -->
+                <div class="category">
+                    <div class="category-header">
+                        <div class="category-icon">🔄</div>
+                        <div>
+                            <div class="category-title">DeFi去中心化金融</div>
+                            <div class="category-subtitle">去中心化金融应用</div>
+                        </div>
+                    </div>
+                    <div class="links">
+                        <a href="https://uniswap.org" class="link" target="_blank">
+                            <span class="link-icon">🦄</span>Uniswap
+                        </a>
+                        <a href="https://aave.com" class="link" target="_blank">
+                            <span class="link-icon">👻</span>Aave
+                        </a>
+                        <a href="https://compound.finance" class="link" target="_blank">
+                            <span class="link-icon">🏛️</span>Compound
+                        </a>
+                        <a href="https://makerdao.com" class="link" target="_blank">
+                            <span class="link-icon">Ⓜ️</span>MakerDAO
+                        </a>
+                        <a href="https://pancakeswap.finance" class="link" target="_blank">
+                            <span class="link-icon">🥞</span>PancakeSwap
+                        </a>
+                        <a href="https://curve.fi" class="link" target="_blank">
+                            <span class="link-icon">📈</span>Curve
+                        </a>
+                    </div>
+                </div>
+
+                <!-- NFT市场 -->
+                <div class="category">
+                    <div class="category-header">
+                        <div class="category-icon">🖼️</div>
+                        <div>
+                            <div class="category-title">NFT非同质化代币</div>
+                            <div class="category-subtitle">数字藏品交易平台</div>
+                        </div>
+                    </div>
+                    <div class="links">
+                        <a href="https://opensea.io" class="link" target="_blank">
+                            <span class="link-icon">🌊</span>OpenSea
+                        </a>
+                        <a href="https://blur.io" class="link" target="_blank">
+                            <span class="link-icon">💨</span>Blur
+                        </a>
+                        <a href="https://rarible.com" class="link" target="_blank">
+                            <span class="link-icon">🎨</span>Rarible
+                        </a>
+                        <a href="https://foundation.app" class="link" target="_blank">
+                            <span class="link-icon">🏛️</span>Foundation
+                        </a>
+                        <a href="https://superrare.com" class="link" target="_blank">
+                            <span class="link-icon">💎</span>SuperRare
+                        </a>
+                        <a href="https://looksrare.org" class="link" target="_blank">
+                            <span class="link-icon">👀</span>LooksRare
+                        </a>
+                    </div>
+                </div>
+
+                <!-- 数据分析 -->
+                <div class="category">
+                    <div class="category-header">
+                        <div class="category-icon">📊</div>
+                        <div>
+                            <div class="category-title">数据分析工具</div>
+                            <div class="category-subtitle">市场数据和分析平台</div>
+                        </div>
+                    </div>
+                    <div class="links">
+                        <a href="https://coinmarketcap.com" class="link" target="_blank">
+                            <span class="link-icon">📈</span>CoinMarketCap
+                        </a>
+                        <a href="https://coingecko.com" class="link" target="_blank">
+                            <span class="link-icon">🦎</span>CoinGecko
+                        </a>
+                        <a href="https://dune.com" class="link" target="_blank">
+                            <span class="link-icon">🔮</span>Dune Analytics
+                        </a>
+                        <a href="https://defipulse.com" class="link" target="_blank">
+                            <span class="link-icon">💓</span>DeFi Pulse
+                        </a>
+                        <a href="https://messari.io" class="link" target="_blank">
+                            <span class="link-icon">📋</span>Messari
+                        </a>
+                        <a href="https://debank.com" class="link" target="_blank">
+                            <span class="link-icon">🏦</span>DeBank
+                        </a>
+                    </div>
+                </div>
+
+                <!-- 钱包 -->
+                <div class="category">
+                    <div class="category-header">
+                        <div class="category-icon">👛</div>
+                        <div>
+                            <div class="category-title">数字钱包</div>
+                            <div class="category-subtitle">存储和管理加密货币</div>
+                        </div>
+                    </div>
+                    <div class="links">
+                        <a href="https://metamask.io" class="link" target="_blank">
+                            <span class="link-icon">🦊</span>MetaMask
+                        </a>
+                        <a href="https://trustwallet.com" class="link" target="_blank">
+                            <span class="link-icon">🛡️</span>Trust Wallet
+                        </a>
+                        <a href="https://phantom.app" class="link" target="_blank">
+                            <span class="link-icon">👻</span>Phantom
+                        </a>
+                        <a href="https://www.ledger.com" class="link" target="_blank">
+                            <span class="link-icon">📱</span>Ledger
+                        </a>
+                        <a href="https://trezor.io" class="link" target="_blank">
+                            <span class="link-icon">🔐</span>Trezor
+                        </a>
+                        <a href="https://walletconnect.com" class="link" target="_blank">
+                            <span class="link-icon">🔗</span>WalletConnect
+                        </a>
+                    </div>
+                </div>
+
+                <!-- 学习资源 -->
+                <div class="category">
+                    <div class="category-header">
+                        <div class="category-icon">📚</div>
+                        <div>
+                            <div class="category-title">学习资源</div>
+                            <div class="category-subtitle">区块链知识和教程</div>
+                        </div>
+                    </div>
+                    <div class="links">
+                        <a href="https://academy.binance.com" class="link" target="_blank">
+                            <span class="link-icon">🎓</span>币安学院
+                        </a>
+                        <a href="https://ethereum.org" class="link" target="_blank">
+                            <span class="link-icon">⚡</span>以太坊官网
+                        </a>
+                        <a href="https://bitcoin.org" class="link" target="_blank">
+                            <span class="link-icon">₿</span>比特币官网
+                        </a>
+                        <a href="https://cryptozombies.io" class="link" target="_blank">
+                            <span class="link-icon">🧟</span>CryptoZombies
+                        </a>
+                        <a href="https://buildspace.so" class="link" target="_blank">
+                            <span class="link-icon">🚀</span>Buildspace
+                        </a>
+                        <a href="https://whitepaper.io" class="link" target="_blank">
+                            <span class="link-icon">📄</span>白皮书库
+                        </a>
+                    </div>
+                </div>
+
+                <!-- 新闻资讯 -->
+                <div class="category">
+                    <div class="category-header">
+                        <div class="category-icon">📰</div>
+                        <div>
+                            <div class="category-title">新闻资讯</div>
+                            <div class="category-subtitle">行业新闻和资讯</div>
+                        </div>
+                    </div>
+                    <div class="links">
+                        <a href="https://cointelegraph.com" class="link" target="_blank">
+                            <span class="link-icon">📡</span>Cointelegraph
+                        </a>
+                        <a href="https://coindesk.com" class="link" target="_blank">
+                            <span class="link-icon">📰</span>CoinDesk
+                        </a>
+                        <a href="https://decrypt.co" class="link" target="_blank">
+                            <span class="link-icon">🔓</span>Decrypt
+                        </a>
+                        <a href="https://theblock.co" class="link" target="_blank">
+                            <span class="link-icon">🧱</span>The Block
+                        </a>
+                        <a href="https://blockworks.co" class="link" target="_blank">
+                            <span class="link-icon">⚒️</span>Blockworks
+                        </a>
+                        <a href="https://bitcoinmagazine.com" class="link" target="_blank">
+                            <span class="link-icon">📖</span>Bitcoin Magazine
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-links">
+                <a href="#about">关于我们</a>
+                <a href="#contact">联系我们</a>
+                <a href="#submit">提交网站</a>
+                <a href="#terms">使用条款</a>
+                <a href="#privacy">隐私政策</a>
+            </div>
+            <p>&copy; 2025 Web3导航. 致力于为区块链行业提供最专业的导航服务</p>
+            <p style="margin-top: 10px; font-size: 14px; color: #999;">
+                声明：本站仅提供导航服务，请用户自行判断网站安全性，谨慎投资
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        // 搜索功能
+        function performSearch() {
+            const searchTerm = document.getElementById('searchInput').value.toLowerCase();
+            if (!searchTerm) return;
+
+            // 高亮搜索结果
+            const links = document.querySelectorAll('.link');
+            links.forEach(link => {
+                const text = link.textContent.toLowerCase();
+                if (text.includes(searchTerm)) {
+                    link.style.background = 'linear-gradient(45deg, #ff6b6b, #feca57)';
+                    link.style.color = 'white';
+                    link.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                } else {
+                    link.style.background = '#f8f9fa';
+                    link.style.color = '#333';
+                }
+            });
+
+            // 3秒后恢复原样
+            setTimeout(() => {
+                links.forEach(link => {
+                    link.style.background = '#f8f9fa';
+                    link.style.color = '#333';
+                });
+            }, 3000);
+        }
+
+        // 回车搜索
+        document.getElementById('searchInput').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                performSearch();
+            }
+        });
+
+        // 点击统计
+        document.querySelectorAll('.link, .hot-link').forEach(link => {
+            link.addEventListener('click', function(e) {
+                console.log('访问链接:', this.href);
+                // 这里可以添加访问统计代码
+            });
+        });
+
+        // 随机推荐功能
+        function randomRecommend() {
+            const allLinks = document.querySelectorAll('.link');
+            const randomLink = allLinks[Math.floor(Math.random() * allLinks.length)];
+            randomLink.style.background = 'linear-gradient(45deg, #667eea, #764ba2)';
+            randomLink.style.color = 'white';
+            randomLink.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            
+            setTimeout(() => {
+                randomLink.style.background = '#f8f9fa';
+                randomLink.style.color = '#333';
+            }, 3000);
+        }
+
+        // 每30秒随机推荐一个链接
+        setInterval(randomRecommend, 30000);
+
+        // 页面加载动画
+        window.addEventListener('load', function() {
+            const categories = document.querySelectorAll('.category');
+            categories.forEach((category, index) => {
+                setTimeout(() => {
+                    category.style.opacity = '1';
+                    category.style.transform = 'translateY(0)';
+                }, index * 100);
+            });
+        });
+
+        // 实时时间显示
+        function updateTime() {
+            const now = new Date();
+            const timeStr = now.toLocaleString('zh-CN');
+            document.title = `Web3导航 - ${timeStr}`;
+        }
+
+        setInterval(updateTime, 1000);
+    </script>
+</body>
+</html>
